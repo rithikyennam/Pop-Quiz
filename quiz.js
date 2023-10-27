@@ -9,13 +9,14 @@ var solution=new Array()
 
 /*Below lists the phrases that will be randomly displayed if the user correctly answers the question. You may extend or shorten this list as desired*/
 var compliments=new Array()
-compliments[0]="Excellent!"
-compliments[1]="Wow, you're really rocking!"
-compliments[2]="You must have studied hard. Good job!"
-compliments[3]="Right on."
-compliments[4]="Correct!"
-compliments[5]="Great Job!"
-compliments[6]="Good work!"
+
+compliments[0] = "Outstanding performance!";
+compliments[1] = "Right on point!";
+compliments[2] = "Nailed it!";
+compliments[3] = "Spot on! Great Job!";
+compliments[4] = "Keep up the good work!";
+compliments[5] = "That's the spirit!";
+compliments[6] = "You're on fire!";
 
 
 /*Below lists the questions, its choices, and finally, the solution to each question. Folow the exact format below when editing the questions. You may have as many questions as needed. Check doc at http://javascriptkit.com/script/script2/comboquiz.htm for more info
