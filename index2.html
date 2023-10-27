@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pop Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #BFD7EA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+
+            
+    background-image: url('jacopo-maia--gOUx23DNks-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+
+
+        }
+
+        #quiz-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        select,
+        input[type="text"] {
+            width: 90%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        input[type="button"] {
+            margin: 10px 5px;
+            padding: 5px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        caption {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        small {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .footer-link {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="quiz-container">
+        <form method="POST" name="instantquiz">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <caption><strong>JavaScript Kit Pop Quiz</strong></caption>
+                <tr>
+                    <td width="100%"><textarea rows="10" name="thequestion" cols="69" wrap="virtual"></textarea></td>
+                </tr>
+                <tr align="center">
+                    <td width="50%"><strong>Solution: </strong><input type="text" name="thesolution" size="35"></td>
+                </tr>
+                <tr align="center">
+                    <td width="100%">
+                        <strong>Your response:</strong>
+                        <select name="theresponse" size="1" onChange="responses()">
+                            <option value="-----">----</option>
+                            <option value="a">a</option>
+                            <option value="b">b</option>
+                            <option value="c">c</option>
+                            <option value="d">d</option>
+                        </select>
+                        <input type="button" value="&lt;&lt;Back" name="B1" onClick="if (whichone&gt;1){whichone--;generatequestions()}">
+                        <input type="button" value="Next&gt;&gt;" name="B2" onClick="if (whichone&lt;=total){whichone++;generatequestions()}">
+                        <small><a href="#" onClick="whichone=1;generatequestions();return false">Start Over</a> </small><input type="checkbox" name="cmode" value="ON"><small>Cheat Mode</small>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="footer-link">
+            <font face="arial" size="-2">This free quiz script provided by</font><br> <font face="arial, helvetica" size="-2"><a href="http://javascriptkit.com">JavaScript Kit</a></font>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+    <script language="JavaScript1.1">
+        var whichone = 1
+        var tempmn = document.instantquiz.thequestion
+
+        function generatequestions() {
+            document.instantquiz.theresponse.selectedIndex = 0
+            if (!document.instantquiz.cmode.checked || whichone >= total + 1 || whichone <= 0)
+                document.instantquiz.thesolution.value = ''
+            if (whichone >= total + 1)
+                tempmn.value = "End of quiz"
+            else {
+                tempmn.value = whichone + ")" + question[whichone] + "\n\n" + "a)" + eval('choice' + whichone + '[1]') + "\n" + "b)" + eval('choice' + whichone + '[2]') + "\n" + "c)" + eval('choice' + whichone + '[3]') + "\n" + "d)" + eval('choice' + whichone + '[4]')
+                if (document.instantquiz.cmode.checked)
+                    document.instantquiz.thesolution.value = solution[whichone]
+            }
+        }
+
+        function responses() {
+            var temp2 = document.instantquiz.theresponse
+            var temp3 = temp2.options[temp2.selectedIndex].text
+            if (temp3 != solution[whichone] && temp2.selectedIndex != 0)
+                document.instantquiz.thesolution.value = "Sorry, the correct answer is " + solution[whichone]
+            else if (temp2.selectedIndex != 0)
+                document.instantquiz.thesolution.value = compliments[Math.round(Math.random() * compliments.length - 1)]
+        }
+
+        generatequestions()
+    </script>
+</body>
+
+</html>
